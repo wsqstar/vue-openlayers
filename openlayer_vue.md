@@ -2,6 +2,8 @@
 ## 入门
 ### 单一数据源
 
+#### 实现
+
 使用最新的vue-cli3.x 或 4.x
 
 1. 安装vue-cli3.0.1: https://cli.vuejs.org/guide/installation.html
@@ -107,11 +109,35 @@ height: 100%;
 5. 运行 npm run serve
    ![运行结果](https://upload-images.jianshu.io/upload_images/4342827-93828bbb2531d3e5.png)
 
+#### 解析
+
+##### 实现原理与步骤
+
+1. 首先实现环境：
+   1. vue/cli
+      1. 全局安装（一台机器仅需一次）
+      2. 自选代码目录下（常用工作区下），新建vue项目并命名
+         1. 选择模板 
+            - 默认：babel，eslint
+            - 推荐：vue-router，vuex，sass，babel，eslint
+   2. openlayers
+      1. 似乎是每个项目来一个
+      2. 使用cnpm安装
+2. 其次删除不需要的文件（组件、文件中链接），新建compoents，配置app.vue
+   1. 删除默认的Helloworld.vue
+   2. 新建olmap.vue，用来显示地图
+   3. 配置App.vue
+3. 运行 程序
+
 ### 多数据源
+
+#### 实现
 
 6、将一些信息放置到配置文件中,src目录下新建config文件夹，建mapconfig.js
 
 **src/config/mapconfig.js**
+
+
 
 ```javascript
 import TileLayer from "ol/layer/Tile"
@@ -119,43 +145,50 @@ import TileArcGISRest from 'ol/source/TileArcGISRest'
 import OSM from "ol/source/OSM"
 import XYZ from 'ol/source/XYZ'
 
-let maptype=2 //0表示部署的离线瓦片地图，1表示OSM,2表示使用Arcgis在线午夜蓝地图服务
+let maptype=2          //0表示部署的离线瓦片地图，1表示OSM,2表示使用Arcgis在线午夜蓝地图服务
 
 var streetmap=function(){
-var maplayer=null;
-switch(maptype){
-case 0:
-maplayer=new TileLayer({
-source: new XYZ({
-url:'http://127.0.0.1:7080/streetmap/shenzhen/{z}/{x}/{y}.jpg'
-})
-})
-break;
-case 1:
-maplayer=new TileLayer({
-source: new OSM()
-})
-break;
-case 2:
-maplayer=new TileLayer({
-source:new TileArcGISRest({
-url:'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer'
-})
-})
-break;
-}
-return [maplayer];
+    var maplayer=null;
+    switch(maptype){
+        case 0:
+            maplayer=new TileLayer({
+                source: new XYZ({
+                    //url:'http://127.0.0.1:7080/streetmap/shenzhen/{z}/{x}/{y}.jpg'
+                    //使用了天地图的服务，而不是自建xyz
+ url:'http://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+                })
+            })
+        break;
+        case 1:
+            maplayer=new TileLayer({
+                source: new OSM()
+            })
+        break;
+        case 2:
+            maplayer=new TileLayer({
+                source:new TileArcGISRest({
+                    url:'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer'
+                })
+            })
+        break;
+    }
+    return [maplayer];
 }
 
 var mapconfig={
-x:114.064839, //中心点经度和纬度
-y:22.548857,
-zoom:15, //地图缩放级别
-streetmap:streetmap
+    x:114.064839,     //中心点经度和纬度
+    y:22.548857,
+    zoom:15,          //地图缩放级别
+    streetmap:streetmap
 };
 
+//暴露出去
 export default mapconfig
 ```
+
+
+
 **src/components/olmap.vue**作相应的更改
 
 ```javascript
@@ -198,12 +231,22 @@ zoom: mapconfig.zoom
 </style>
 ```
 
+#### 解析
 
+##### 实现原理与步骤
+
+1. 使用mapconfig.js 实现配置，并暴露出去
+2. 将olmap.vue中，所有的数值转为mapconfig定义的变量
+
+##### 区分
+
+1. 与ol3相比，使用变量更加方便
+2. 整体逻辑视图没有变化，ol方面仍然是layer图层、source数据源，view视图等。
 
 
 
 
 ## 参考
-- vue+openlayers学习 漫漫江雪
+- [vue+openlayers学习 漫漫江雪](https://www.jianshu.com/p/fd399ad4b7d8)
 
 
