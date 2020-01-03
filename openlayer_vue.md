@@ -14,13 +14,14 @@
 ![选择default](https://upload-images.jianshu.io/upload_images/4342827-7b3c4007f8409e30.png)
 
 3. 运行
+
 ```
 cd vue-openlayers
 npm run serve
 ```
 
-4、用vscode打开项目，打开终端，安装openlayers
-openlayers官网：http://openlayers.org
+4. 用vscode打开项目，打开终端，安装openlayers
+   openlayers官网：http://openlayers.org
 
 	 cnpm i -S ol 
 
@@ -29,7 +30,7 @@ openlayers官网：http://openlayers.org
 
 **components/olmap.vue**
 
-```
+```javascript
 <template>
 <div id="map" ref="rootmap">
 
@@ -75,7 +76,7 @@ zoom: 12
 ```
 **App.vue**
 
-```
+```javascript
 <template>
 <div id="app">
 <olmap />
@@ -103,8 +104,8 @@ height: 100%;
 }
 </style>
 ```
-5、运行 npm run serve
-![运行结果](https://upload-images.jianshu.io/upload_images/4342827-93828bbb2531d3e5.png)
+5. 运行 npm run serve
+   ![运行结果](https://upload-images.jianshu.io/upload_images/4342827-93828bbb2531d3e5.png)
 
 ### 多数据源
 
@@ -112,7 +113,7 @@ height: 100%;
 
 **src/config/mapconfig.js**
 
-```
+```javascript
 import TileLayer from "ol/layer/Tile"
 import TileArcGISRest from 'ol/source/TileArcGISRest'
 import OSM from "ol/source/OSM"
@@ -157,7 +158,7 @@ export default mapconfig
 ```
 **src/components/olmap.vue**作相应的更改
 
-```
+```javascript
 <template>
 <div id="map" ref="rootmap">
 
