@@ -4,7 +4,7 @@
 
 #### 实现
 
-使用最新的vue-cli3.x 或 4.x
+*使用最新的vue-cli3.x 或 4.x*
 
 1. 安装vue-cli3.0.1: https://cli.vuejs.org/guide/installation.html
 
@@ -25,50 +25,54 @@ npm run serve
 4. 用vscode打开项目，打开终端，安装openlayers
    openlayers官网：http://openlayers.org
 
-	 cnpm i -S ol 
+	 `cnpm i -S ol `
 
 **删除**掉HelloWorld.vue
-新建 olmap.vue组件 （vscode编辑器下可以安装vetur和 vue vscode snippets两插件方便代码提示及写vue代码-vbase命令）
+新建 **olmap.vue**组件 （vscode编辑器下可以安装**vetur**和 **vue vscode snippets**两插件方便代码提示及写vue代码-vbase命令）
 
 **components/olmap.vue**
 
 ```javascript
 <template>
-<div id="map" ref="rootmap">
+    <div id="map" ref="rootmap">
 
-</div>
+    </div>
 </template>
 
 <script>
+//一连串的引入
 import "ol/ol.css";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
+//暴露默认地图
 export default {
-data() {
-return {
-map: null
-};
-},
-mounted() {
-var mapcontainer = this.$refs.rootmap;
-this.map = new Map({
-target: "map",
-layers: [
-new TileLayer({
-source: new OSM()
-})
-],
-view: new View({
-projection: "EPSG:4326", //使用这个坐标系
-center: [114.064839,22.548857], //深圳
-zoom: 12
-})
-});
-}
+  data() {
+    return {
+      map: null
+    };
+  },
+  //疑问
+  mounted() {
+    var mapcontainer = this.$refs.rootmap;
+    this.map = new Map({
+      target: "map",
+      layers: [
+        new TileLayer({
+          source: new OSM()
+        })
+      ],
+      view: new View({
+        projection: "EPSG:4326",    //使用这个坐标系
+        center: [114.064839,22.548857],  //深圳
+        zoom: 12
+      })
+    });
+  }
 };
 </script>
 
+//设置文件格式
 <style>
 #map{height:100%;}
 /*隐藏ol的一些自带元素*/
@@ -80,29 +84,30 @@ zoom: 12
 
 ```javascript
 <template>
-<div id="app">
-<olmap />
-</div>
+  <div id="app">
+    <olmap />
+  </div>
 </template>
 
 <script>
+//引入
 import olmap from './components/olmap.vue'
 
 export default {
-name: 'app',
-components: {
-olmap
-}
+  name: 'app',
+  components: {
+    olmap
+  }
 }
 </script>
 
 <style>
 *{padding:0; margin:0;}
 html,body{
-height: 100%;
+  height: 100%;
 }
 #app {
-height: 100%;
+  height: 100%;
 }
 </style>
 ```
@@ -115,19 +120,23 @@ height: 100%;
 
 1. 首先实现环境：
    1. vue/cli
-      1. 全局安装（一台机器仅需一次）
+      1. 全局安装（一台机器**仅需一次**）
       2. 自选代码目录下（常用工作区下），新建vue项目并命名
          1. 选择模板 
             - 默认：babel，eslint
-            - 推荐：vue-router，vuex，sass，babel，eslint
+            - 推荐：**vue-router，vuex，sass，babel，eslint**
    2. openlayers
-      1. 似乎是每个项目来一个
+      1. 似乎是**每个项目来一个**
       2. 使用cnpm安装
+   
 2. 其次删除不需要的文件（组件、文件中链接），新建compoents，配置app.vue
    1. 删除默认的Helloworld.vue
    2. 新建olmap.vue，用来显示地图
    3. 配置App.vue
+   
 3. 运行 程序
+
+   `npm run serve`
 
 ### 多数据源
 
@@ -136,8 +145,6 @@ height: 100%;
 6、将一些信息放置到配置文件中,src目录下新建config文件夹，建mapconfig.js
 
 **src/config/mapconfig.js**
-
-
 
 ```javascript
 import TileLayer from "ol/layer/Tile"
@@ -154,7 +161,7 @@ var streetmap=function(){
             maplayer=new TileLayer({
                 source: new XYZ({
                     //url:'http://127.0.0.1:7080/streetmap/shenzhen/{z}/{x}/{y}.jpg'
-                    //使用了天地图的服务，而不是自建xyz
+                    //学习时使用了天地图的服务，而不是离线xyz，主要是没准备材料
  url:'http://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 
                 })
@@ -193,9 +200,9 @@ export default mapconfig
 
 ```javascript
 <template>
-<div id="map" ref="rootmap">
+    <div id="map" ref="rootmap">
 
-</div>
+    </div>
 </template>
 
 <script>
@@ -203,23 +210,23 @@ import "ol/ol.css"
 import { Map, View } from "ol"
 import mapconfig from '../config/mapconfig'
 export default {
-data() {
-return {
-map: null
-};
-},
-mounted() {
-var mapcontainer = this.$refs.rootmap;
-this.map = new Map({
-target: mapcontainer,
-layers: mapconfig.streetmap(),
-view: new View({
-projection: "EPSG:4326", //使用这个坐标系
-center: [mapconfig.x,mapconfig.y], //深圳
-zoom: mapconfig.zoom
-})
-});
-}
+  data() {
+    return {
+      map: null
+    };
+  },
+  mounted() {
+    var mapcontainer = this.$refs.rootmap;
+    this.map = new Map({
+      target: mapcontainer,
+      layers: mapconfig.streetmap(),
+      view: new View({
+        projection: "EPSG:4326",    //使用这个坐标系
+        center: [mapconfig.x,mapconfig.y],  //深圳
+        zoom: mapconfig.zoom
+      })
+    });
+  }
 };
 </script>
 
