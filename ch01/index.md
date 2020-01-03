@@ -241,7 +241,7 @@ zoom: mapconfig.zoom
 ##### 区分
 
 1. 与ol3相比，使用变量更加方便
-2. 整体逻辑视图没有变化，ol方面仍然是layer图层、source数据源，view视图等。
+2. 整体逻辑视图没有变化，ol方面仍然是layer图层、source数据源，view视图
 
 
 
