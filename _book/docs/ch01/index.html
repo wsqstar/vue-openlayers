@@ -162,7 +162,7 @@
 <h2 id="&#x5165;&#x95E8;">&#x5165;&#x95E8;</h2>
 <h3 id="&#x5355;&#x4E00;&#x6570;&#x636E;&#x6E90;">&#x5355;&#x4E00;&#x6570;&#x636E;&#x6E90;</h3>
 <h4 id="&#x5B9E;&#x73B0;">&#x5B9E;&#x73B0;</h4>
-<p><em>&#x4F7F;&#x7528;&#x6700;&#x65B0;&#x7684;vue-cli3.x &#x6216; 4.x</em></p>
+<p>&#x4F7F;&#x7528;&#x6700;&#x65B0;&#x7684;vue-cli3.x &#x6216; 4.x</p>
 <ol>
 <li><p>&#x5B89;&#x88C5;vue-cli3.0.1: <a href="https://cli.vuejs.org/guide/installation.html" target="_blank">https://cli.vuejs.org/guide/installation.html</a></p>
 <p> <code>cnpm install -g @vue/cli</code> </p>
@@ -179,52 +179,48 @@ npm run serve
 </code></pre><ol>
 <li><p>&#x7528;vscode&#x6253;&#x5F00;&#x9879;&#x76EE;&#xFF0C;&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#xFF0C;&#x5B89;&#x88C5;openlayers
 openlayers&#x5B98;&#x7F51;&#xFF1A;<a href="http://openlayers.org" target="_blank">http://openlayers.org</a></p>
-<p>  <code>cnpm i -S ol</code></p>
+<p>  cnpm i -S ol </p>
 </li>
 </ol>
 <p><strong>&#x5220;&#x9664;</strong>&#x6389;HelloWorld.vue
-&#x65B0;&#x5EFA; <strong>olmap.vue</strong>&#x7EC4;&#x4EF6; &#xFF08;vscode&#x7F16;&#x8F91;&#x5668;&#x4E0B;&#x53EF;&#x4EE5;&#x5B89;&#x88C5;<strong>vetur</strong>&#x548C; <strong>vue vscode snippets</strong>&#x4E24;&#x63D2;&#x4EF6;&#x65B9;&#x4FBF;&#x4EE3;&#x7801;&#x63D0;&#x793A;&#x53CA;&#x5199;vue&#x4EE3;&#x7801;-vbase&#x547D;&#x4EE4;&#xFF09;</p>
+&#x65B0;&#x5EFA; olmap.vue&#x7EC4;&#x4EF6; &#xFF08;vscode&#x7F16;&#x8F91;&#x5668;&#x4E0B;&#x53EF;&#x4EE5;&#x5B89;&#x88C5;vetur&#x548C; vue vscode snippets&#x4E24;&#x63D2;&#x4EF6;&#x65B9;&#x4FBF;&#x4EE3;&#x7801;&#x63D0;&#x793A;&#x53CA;&#x5199;vue&#x4EE3;&#x7801;-vbase&#x547D;&#x4EE4;&#xFF09;</p>
 <p><strong>components/olmap.vue</strong></p>
 <pre><code class="lang-javascript">&lt;template&gt;
-    &lt;div id=&quot;map&quot; ref=&quot;rootmap&quot;&gt;
+&lt;div id=&quot;map&quot; ref=&quot;rootmap&quot;&gt;
 
-    &lt;/div&gt;
+&lt;/div&gt;
 &lt;/template&gt;
 
 &lt;script&gt;
-//&#x4E00;&#x8FDE;&#x4E32;&#x7684;&#x5F15;&#x5165;
 import &quot;ol/ol.css&quot;;
 import { Map, View } from &quot;ol&quot;;
 import TileLayer from &quot;ol/layer/Tile&quot;;
 import OSM from &quot;ol/source/OSM&quot;;
-//&#x66B4;&#x9732;&#x9ED8;&#x8BA4;&#x5730;&#x56FE;
 export default {
-  data() {
-    return {
-      map: null
-    };
-  },
-  //&#x7591;&#x95EE;
-  mounted() {
-    var mapcontainer = this.$refs.rootmap;
-    this.map = new Map({
-      target: &quot;map&quot;,
-      layers: [
-        new TileLayer({
-          source: new OSM()
-        })
-      ],
-      view: new View({
-        projection: &quot;EPSG:4326&quot;,    //&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5750;&#x6807;&#x7CFB;
-        center: [114.064839,22.548857],  //&#x6DF1;&#x5733;
-        zoom: 12
-      })
-    });
-  }
+data() {
+return {
+map: null
+};
+},
+mounted() {
+var mapcontainer = this.$refs.rootmap;
+this.map = new Map({
+target: &quot;map&quot;,
+layers: [
+new TileLayer({
+source: new OSM()
+})
+],
+view: new View({
+projection: &quot;EPSG:4326&quot;, //&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5750;&#x6807;&#x7CFB;
+center: [114.064839,22.548857], //&#x6DF1;&#x5733;
+zoom: 12
+})
+});
+}
 };
 &lt;/script&gt;
 
-//&#x8BBE;&#x7F6E;&#x6587;&#x4EF6;&#x683C;&#x5F0F;
 &lt;style&gt;
 #map{height:100%;}
 /*&#x9690;&#x85CF;ol&#x7684;&#x4E00;&#x4E9B;&#x81EA;&#x5E26;&#x5143;&#x7D20;*/
@@ -234,30 +230,29 @@ export default {
 </code></pre>
 <p><strong>App.vue</strong></p>
 <pre><code class="lang-javascript">&lt;template&gt;
-  &lt;div id=&quot;app&quot;&gt;
-    &lt;olmap /&gt;
-  &lt;/div&gt;
+&lt;div id=&quot;app&quot;&gt;
+&lt;olmap /&gt;
+&lt;/div&gt;
 &lt;/template&gt;
 
 &lt;script&gt;
-//&#x5F15;&#x5165;
 import olmap from &apos;./components/olmap.vue&apos;
 
 export default {
-  name: &apos;app&apos;,
-  components: {
-    olmap
-  }
+name: &apos;app&apos;,
+components: {
+olmap
+}
 }
 &lt;/script&gt;
 
 &lt;style&gt;
 *{padding:0; margin:0;}
 html,body{
-  height: 100%;
+height: 100%;
 }
 #app {
-  height: 100%;
+height: 100%;
 }
 &lt;/style&gt;
 </code></pre>
@@ -268,14 +263,13 @@ html,body{
 <h4 id="&#x89E3;&#x6790;">&#x89E3;&#x6790;</h4>
 <h5 id="&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x4E0E;&#x6B65;&#x9AA4;">&#x5B9E;&#x73B0;&#x539F;&#x7406;&#x4E0E;&#x6B65;&#x9AA4;</h5>
 <ol>
-<li><p>&#x9996;&#x5148;&#x5B9E;&#x73B0;&#x73AF;&#x5883;&#xFF1A;</p>
-<ol>
+<li>&#x9996;&#x5148;&#x5B9E;&#x73B0;&#x73AF;&#x5883;&#xFF1A;<ol>
 <li>vue/cli<ol>
-<li>&#x5168;&#x5C40;&#x5B89;&#x88C5;&#xFF08;&#x4E00;&#x53F0;&#x673A;&#x5668;<strong>&#x4EC5;&#x9700;&#x4E00;&#x6B21;</strong>&#xFF09;</li>
+<li>&#x5168;&#x5C40;&#x5B89;&#x88C5;&#xFF08;&#x4E00;&#x53F0;&#x673A;&#x5668;&#x4EC5;&#x9700;&#x4E00;&#x6B21;&#xFF09;</li>
 <li>&#x81EA;&#x9009;&#x4EE3;&#x7801;&#x76EE;&#x5F55;&#x4E0B;&#xFF08;&#x5E38;&#x7528;&#x5DE5;&#x4F5C;&#x533A;&#x4E0B;&#xFF09;&#xFF0C;&#x65B0;&#x5EFA;vue&#x9879;&#x76EE;&#x5E76;&#x547D;&#x540D;<ol>
 <li>&#x9009;&#x62E9;&#x6A21;&#x677F; <ul>
 <li>&#x9ED8;&#x8BA4;&#xFF1A;babel&#xFF0C;eslint</li>
-<li>&#x63A8;&#x8350;&#xFF1A;<strong>vue-router&#xFF0C;vuex&#xFF0C;sass&#xFF0C;babel&#xFF0C;eslint</strong></li>
+<li>&#x63A8;&#x8350;&#xFF1A;vue-router&#xFF0C;vuex&#xFF0C;sass&#xFF0C;babel&#xFF0C;eslint</li>
 </ul>
 </li>
 </ol>
@@ -283,22 +277,19 @@ html,body{
 </ol>
 </li>
 <li>openlayers<ol>
-<li>&#x4F3C;&#x4E4E;&#x662F;<strong>&#x6BCF;&#x4E2A;&#x9879;&#x76EE;&#x6765;&#x4E00;&#x4E2A;</strong></li>
+<li>&#x4F3C;&#x4E4E;&#x662F;&#x6BCF;&#x4E2A;&#x9879;&#x76EE;&#x6765;&#x4E00;&#x4E2A;</li>
 <li>&#x4F7F;&#x7528;cnpm&#x5B89;&#x88C5;</li>
 </ol>
 </li>
 </ol>
 </li>
-<li><p>&#x5176;&#x6B21;&#x5220;&#x9664;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x6587;&#x4EF6;&#xFF08;&#x7EC4;&#x4EF6;&#x3001;&#x6587;&#x4EF6;&#x4E2D;&#x94FE;&#x63A5;&#xFF09;&#xFF0C;&#x65B0;&#x5EFA;compoents&#xFF0C;&#x914D;&#x7F6E;app.vue</p>
-<ol>
+<li>&#x5176;&#x6B21;&#x5220;&#x9664;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x6587;&#x4EF6;&#xFF08;&#x7EC4;&#x4EF6;&#x3001;&#x6587;&#x4EF6;&#x4E2D;&#x94FE;&#x63A5;&#xFF09;&#xFF0C;&#x65B0;&#x5EFA;compoents&#xFF0C;&#x914D;&#x7F6E;app.vue<ol>
 <li>&#x5220;&#x9664;&#x9ED8;&#x8BA4;&#x7684;Helloworld.vue</li>
 <li>&#x65B0;&#x5EFA;olmap.vue&#xFF0C;&#x7528;&#x6765;&#x663E;&#x793A;&#x5730;&#x56FE;</li>
 <li>&#x914D;&#x7F6E;App.vue</li>
 </ol>
 </li>
-<li><p>&#x8FD0;&#x884C; &#x7A0B;&#x5E8F;</p>
-<p><code>npm run serve</code></p>
-</li>
+<li>&#x8FD0;&#x884C; &#x7A0B;&#x5E8F;</li>
 </ol>
 <h3 id="&#x591A;&#x6570;&#x636E;&#x6E90;">&#x591A;&#x6570;&#x636E;&#x6E90;</h3>
 <h4 id="&#x5B9E;&#x73B0;">&#x5B9E;&#x73B0;</h4>
@@ -318,7 +309,7 @@ html,body{
             maplayer=<span class="hljs-keyword">new</span> TileLayer({
                 source: <span class="hljs-keyword">new</span> XYZ({
                     <span class="hljs-comment">//url:&apos;http://127.0.0.1:7080/streetmap/shenzhen/{z}/{x}/{y}.jpg&apos;</span>
-                    <span class="hljs-comment">//&#x5B66;&#x4E60;&#x65F6;&#x4F7F;&#x7528;&#x4E86;&#x5929;&#x5730;&#x56FE;&#x7684;&#x670D;&#x52A1;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x79BB;&#x7EBF;xyz&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x6CA1;&#x51C6;&#x5907;&#x6750;&#x6599;</span>
+                    <span class="hljs-comment">//&#x4F7F;&#x7528;&#x4E86;&#x5929;&#x5730;&#x56FE;&#x7684;&#x670D;&#x52A1;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x81EA;&#x5EFA;xyz</span>
  url:<span class="hljs-string">&apos;http://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png&apos;</span>
 
                 })
@@ -352,9 +343,9 @@ html,body{
 </code></pre>
 <p><strong>src/components/olmap.vue</strong>&#x4F5C;&#x76F8;&#x5E94;&#x7684;&#x66F4;&#x6539;</p>
 <pre><code class="lang-javascript">&lt;template&gt;
-    &lt;div id=&quot;map&quot; ref=&quot;rootmap&quot;&gt;
+&lt;div id=&quot;map&quot; ref=&quot;rootmap&quot;&gt;
 
-    &lt;/div&gt;
+&lt;/div&gt;
 &lt;/template&gt;
 
 &lt;script&gt;
@@ -362,23 +353,23 @@ import &quot;ol/ol.css&quot;
 import { Map, View } from &quot;ol&quot;
 import mapconfig from &apos;../config/mapconfig&apos;
 export default {
-  data() {
-    return {
-      map: null
-    };
-  },
-  mounted() {
-    var mapcontainer = this.$refs.rootmap;
-    this.map = new Map({
-      target: mapcontainer,
-      layers: mapconfig.streetmap(),
-      view: new View({
-        projection: &quot;EPSG:4326&quot;,    //&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5750;&#x6807;&#x7CFB;
-        center: [mapconfig.x,mapconfig.y],  //&#x6DF1;&#x5733;
-        zoom: mapconfig.zoom
-      })
-    });
-  }
+data() {
+return {
+map: null
+};
+},
+mounted() {
+var mapcontainer = this.$refs.rootmap;
+this.map = new Map({
+target: mapcontainer,
+layers: mapconfig.streetmap(),
+view: new View({
+projection: &quot;EPSG:4326&quot;, //&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5750;&#x6807;&#x7CFB;
+center: [mapconfig.x,mapconfig.y], //&#x6DF1;&#x5733;
+zoom: mapconfig.zoom
+})
+});
+}
 };
 &lt;/script&gt;
 
@@ -443,7 +434,7 @@ export default {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"入门","level":"1.2","depth":1,"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch01/index.md","mtime":"2020-01-03T06:05:51.259Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-03T06:07:58.709Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"入门","level":"1.2","depth":1,"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"ch01/index.md","mtime":"2020-01-03T03:27:16.730Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-03T03:54:01.717Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
